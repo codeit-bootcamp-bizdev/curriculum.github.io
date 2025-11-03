@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>부트캠프 정확한 캘린더</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .month-container {
+            margin-bottom: 40px;
+            background: #f8f9ff;
+            border-radius: 15px;
+            padding: 20px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .month-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 2px;
+            background: #e1e8ff;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        
+        .day-header {
+            background: #667eea;
+            color: white;
+            padding: 15px 5px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 8px;
+            font-size: 0.9em;
+        }
+        
+        .day {
+            background: white;
+            min-height: 120px;
+            padding: 5px;
+            border-radius: 8px;
+            position: relative;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .day:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .day-number {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+        
+        .day-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            height: calc(100% - 25px);
+        }
+        
+        .activity-block {
+            padding: 3px 5px;
+            border-radius: 4px;
+            font-size: 0.7em;
+            line-height: 1.2;
+            font-weight: 500;
+            text-align: center;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 20px;
+        }
+        
+        .empty-day {
+            background: #f0f0f0;
+        }
+        
+        .holiday-day {
+            background: #ffebee;
+            border: 2px solid #f44336;
+        }
+        
+        .weekend-day {
+            background: #f5f5f5;
+        }
+        
+        .holiday-number {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+        
+        .holiday-name {
+            font-size: 0.7em;
+            color: #d32f2f;
+            margin-top: 2px;
+            font-weight: normal;
+        }
+        
+        /* 색상 체계 */
+        .theory {
+            background: #e8e5ff;
+            color: #5b2c87;
+            border: 1px solid #9c27b0;
+        }
+        
+        .sprint {
+            background: #e8f5e8;
+            color: #2e7d32;
+            border: 1px solid #4caf50;
+        }
+        
+        .project {
+            background: #e3f2fd;
+            color: #1565c0;
+            border: 1px solid #2196f3;
+        }
+        
+        .holiday {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #f44336;
+        }
+        
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: white;
+            padding: 8px 12px;
+            border-radius: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-size: 0.85em;
+        }
+        
+        .legend-color {
+            width: 15px;
+            height: 15px;
+            border-radius: 3px;
+            border: 1px solid #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎓 IT 사업개발 과정 1기 시간표(안)</h1>
+        
+        
+    <div class="month-container">
+      <div class="month-title">2025년 12월</div>
+      <div class="calendar">
+        <div class="day-header">월</div>
+        <div class="day-header">화</div>
+        <div class="day-header">수</div>
+        <div class="day-header">목</div>
+        <div class="day-header">금</div>
+        <div class="day-header">토</div>
+        <div class="day-header">일</div>
+  <div class="day"><div class="day-number ">1</div></div><div class="day"><div class="day-number ">2</div></div><div class="day"><div class="day-number ">3</div></div><div class="day"><div class="day-number ">4</div></div><div class="day"><div class="day-number ">5</div></div><div class="day weekend-day"><div class="day-number ">6</div></div><div class="day weekend-day"><div class="day-number ">7</div></div><div class="day"><div class="day-number ">8</div></div><div class="day"><div class="day-number ">9</div></div><div class="day"><div class="day-number ">10</div></div><div class="day"><div class="day-number ">11</div></div><div class="day"><div class="day-number ">12</div></div><div class="day weekend-day"><div class="day-number ">13</div></div><div class="day weekend-day"><div class="day-number ">14</div></div><div class="day"><div class="day-number ">15</div></div><div class="day"><div class="day-number ">16</div></div><div class="day"><div class="day-number ">17</div></div><div class="day"><div class="day-number ">18</div></div><div class="day"><div class="day-number ">19</div></div><div class="day weekend-day"><div class="day-number ">20</div></div><div class="day weekend-day"><div class="day-number ">21</div></div><div class="day"><div class="day-number ">22</div></div><div class="day"><div class="day-number ">23</div></div><div class="day"><div class="day-number ">24</div></div><div class="day holiday-day"><div class="day-number holiday-number">25</div><div class="holiday-name">성탄절</div><div class="day-content"></div></div><div class="day"><div class="day-number ">26</div></div><div class="day weekend-day"><div class="day-number ">27</div></div><div class="day weekend-day"><div class="day-number ">28</div></div><div class="day"><div class="day-number ">29</div></div><div class="day"><div class="day-number ">30</div><div class="day-content"><div class="activity-block holiday">입학식 및 오리엔테이션 2h</div></div></div><div class="day"><div class="day-number ">31</div></div><div class="day empty-day"><div class="day-number holiday-number">1</div><div class="holiday-name">새해 첫날</div></div><div class="day empty-day"><div class="day-number ">2</div></div><div class="day empty-day"><div class="day-number ">3</div></div><div class="day empty-day"><div class="day-number ">4</div></div>
+      </div>
+    </div>
+  
+    <div class="month-container">
+      <div class="month-title">2026년 1월</div>
+      <div class="calendar">
+        <div class="day-header">월</div>
+        <div class="day-header">화</div>
+        <div class="day-header">수</div>
+        <div class="day-header">목</div>
+        <div class="day-header">금</div>
+        <div class="day-header">토</div>
+        <div class="day-header">일</div>
+  <div class="day empty-day"><div class="day-number ">29</div></div><div class="day empty-day"><div class="day-number ">30</div></div><div class="day empty-day"><div class="day-number ">31</div></div><div class="day holiday-day"><div class="day-number holiday-number">1</div><div class="holiday-name">새해 첫날</div><div class="day-content"></div></div><div class="day"><div class="day-number ">2</div><div class="day-content"><div class="activity-block theory">생성형 AI 활용 역량 8h</div><div class="activity-block theory">생성형 AI 활용 역량 69h</div></div></div><div class="day weekend-day"><div class="day-number ">3</div></div><div class="day weekend-day"><div class="day-number ">4</div></div><div class="day"><div class="day-number ">5</div><div class="day-content"><div class="activity-block theory">생성형 AI 활용 역량 69h</div><div class="activity-block theory">비즈니스 설계 68h</div></div></div><div class="day"><div class="day-number ">6</div><div class="day-content"><div class="activity-block theory">비즈니스 설계 68h</div></div></div><div class="day"><div class="day-number ">7</div><div class="day-content"><div class="activity-block theory">비즈니스 설계 68h</div></div></div><div class="day"><div class="day-number ">8</div><div class="day-content"><div class="activity-block theory">비즈니스 설계 68h</div><div class="activity-block theory">비즈니스 설계 7h</div><div class="activity-block sprint">생성형 AI 활용 역량 23h</div></div></div><div class="day"><div class="day-number ">9</div><div class="day-content"><div class="activity-block sprint">생성형 AI 활용 역량 23h</div><div class="activity-block sprint">생성형 AI 활용 역량 3h</div></div></div><div class="day weekend-day"><div class="day-number ">10</div></div><div class="day weekend-day"><div class="day-number ">11</div></div><div class="day"><div class="day-number ">12</div><div class="day-content"><div class="activity-block sprint">비즈니스 설계 79h</div></div></div><div class="day"><div class="day-number ">13</div><div class="day-content"><div class="activity-block sprint">비즈니스 설계 79h</div><div class="activity-block sprint">비즈니스 설계 23h</div></div></div><div class="day"><div class="day-number ">14</div><div class="day-content"><div class="activity-block sprint">비즈니스 설계 23h</div><div class="activity-block theory">시장 수요 검증 4h</div></div></div><div class="day"><div class="day-number ">15</div><div class="day-content"><div class="activity-block theory">시장 수요 검증 10h</div></div></div><div class="day"><div class="day-number ">16</div><div class="day-content"><div class="activity-block sprint">시장 수요 검증 74h</div></div></div><div class="day weekend-day"><div class="day-number ">17</div></div><div class="day weekend-day"><div class="day-number ">18</div></div><div class="day"><div class="day-number ">19</div><div class="day-content"><div class="activity-block sprint">시장 수요 검증 74h</div><div class="activity-block sprint">시장 수요 검증 27h</div></div></div><div class="day"><div class="day-number ">20</div><div class="day-content"><div class="activity-block sprint">시장 수요 검증 27h</div><div class="activity-block project">실무 프로젝트(1) 192h</div></div></div><div class="day"><div class="day-number ">21</div><div class="day-content"><div class="activity-block project">실무 프로젝트(1) 192h</div></div></div><div class="day"><div class="day-number ">22</div><div class="day-content"><div class="activity-block project">실무 프로젝트(1) 192h</div></div></div><div class="day"><div class="day-number ">23</div><div class="day-content"><div class="activity-block project">실무 프로젝트(1) 192h</div></div></div><div class="day weekend-day"><div class="day-number ">24</div></div><div class="day weekend-day"><div class="day-number ">25</div></div><div class="day"><div class="day-number ">26</div><div class="day-content"><div class="activity-block project">실무 프로젝트(1) 192h</div></div></div><div class="day"><div class="day-number ">27</div><div class="day-content"><div class="activity-block project">실무 프로젝트(1) 192h</div></div></div><div class="day"><div class="day-number ">28</div><div class="day-content"><div class="activity-block project">실무 프로젝트(1) 192h</div><div class="activity-block theory">프로덕트 기획 5h</div></div></div><div class="day"><div class="day-number ">29</div><div class="day-content"><div class="activity-block theory">프로덕트 기획 104h</div></div></div><div class="day"><div class="day-number ">30</div><div class="day-content"><div class="activity-block theory">프로덕트 기획 104h</div></div></div><div class="day weekend-day"><div class="day-number ">31</div></div><div class="day empty-day"><div class="day-number ">1</div></div>
+      </div>
+    </div>
+  
+    <div class="month-container">
+      <div class="month-title">2026년 2월</div>
+      <div class="calendar">
+        <div class="day-header">월</div>
+        <div class="day-header">화</div>
+        <div class="day-header">수</div>
+        <div class="day-header">목</div>
+        <div class="day-header">금</div>
+        <div class="day-header">토</div>
+        <div class="day-header">일</div>
+  <div class="day empty-day"><div class="day-number ">26</div></div><div class="day empty-day"><div class="day-number ">27</div></div><div class="day empty-day"><div class="day-number ">28</div></div><div class="day empty-day"><div class="day-number ">29</div></div><div class="day empty-day"><div class="day-number ">30</div></div><div class="day empty-day"><div class="day-number ">31</div></div><div class="day weekend-day"><div class="day-number ">1</div></div><div class="day"><div class="day-number ">2</div><div class="day-content"><div class="activity-block theory">프로덕트 기획 104h</div><div class="activity-block theory">UX/UI 디자인 189h</div></div></div><div class="day"><div class="day-number ">3</div><div class="day-content"><div class="activity-block theory">UX/UI 디자인 189h</div></div></div><div class="day"><div class="day-number ">4</div><div class="day-content"><div class="activity-block theory">UX/UI 디자인 189h</div></div></div><div class="day"><div class="day-number ">5</div><div class="day-content"><div class="activity-block theory">UX/UI 디자인 189h</div></div></div><div class="day"><div class="day-number ">6</div><div class="day-content"><div class="activity-block theory">UX/UI 디자인 189h</div></div></div><div class="day weekend-day"><div class="day-number ">7</div></div><div class="day weekend-day"><div class="day-number ">8</div></div><div class="day"><div class="day-number ">9</div><div class="day-content"><div class="activity-block theory">UX/UI 디자인 189h</div></div></div><div class="day"><div class="day-number ">10</div><div class="day-content"><div class="activity-block theory">UX/UI 디자인 189h</div><div class="activity-block project">실무 프로젝트(2) 552h</div></div></div><div class="day"><div class="day-number ">11</div><div class="day-content"><div class="activity-block project">실무 프로젝트(2) 552h</div></div></div><div class="day"><div class="day-number ">12</div><div class="day-content"><div class="activity-block project">실무 프로젝트(2) 552h</div></div></div><div class="day"><div class="day-number ">13</div><div class="day-content"><div class="activity-block project">실무 프로젝트(2) 552h</div></div></div><div class="day weekend-day"><div class="day-number ">14</div></div><div class="day weekend-day"><div class="day-number ">15</div></div><div class="day holiday-day"><div class="day-number holiday-number">16</div><div class="holiday-name">설날 연휴</div><div class="day-content"></div></div><div class="day holiday-day"><div class="day-number holiday-number">17</div><div class="holiday-name">설날</div><div class="day-content"></div></div><div class="day holiday-day"><div class="day-number holiday-number">18</div><div class="holiday-name">설날 연휴</div><div class="day-content"></div></div><div class="day"><div class="day-number ">19</div><div class="day-content"><div class="activity-block project">실무 프로젝트(2) 552h</div></div></div><div class="day"><div class="day-number ">20</div><div class="day-content"><div class="activity-block project">실무 프로젝트(2) 552h</div></div></div><div class="day weekend-day"><div class="day-number ">21</div></div><div class="day weekend-day"><div class="day-number ">22</div></div><div class="day"><div class="day-number ">23</div><div class="day-content"><div class="activity-block project">실무 프로젝트(2) 552h</div></div></div><div class="day"><div class="day-number ">24</div><div class="day-content"><div class="activity-block project">실무 프로젝트(2) 552h</div></div></div><div class="day"><div class="day-number ">25</div><div class="day-content"><div class="activity-block project">실무 프로젝트(2) 552h</div></div></div><div class="day"><div class="day-number ">26</div><div class="day-content"><div class="activity-block project">실무 프로젝트(2) 552h</div></div></div><div class="day"><div class="day-number ">27</div><div class="day-content"><div class="activity-block project">실무 프로젝트(2) 552h</div></div></div><div class="day weekend-day"><div class="day-number ">28</div></div><div class="day empty-day"><div class="day-number holiday-number">1</div><div class="holiday-name">삼일절</div></div>
+      </div>
+    </div>
+  
+    <div class="month-container">
+      <div class="month-title">2026년 3월</div>
+      <div class="calendar">
+        <div class="day-header">월</div>
+        <div class="day-header">화</div>
+        <div class="day-header">수</div>
+        <div class="day-header">목</div>
+        <div class="day-header">금</div>
+        <div class="day-header">토</div>
+        <div class="day-header">일</div>
+  <div class="day empty-day"><div class="day-number ">23</div></div><div class="day empty-day"><div class="day-number ">24</div></div><div class="day empty-day"><div class="day-number ">25</div></div><div class="day empty-day"><div class="day-number ">26</div></div><div class="day empty-day"><div class="day-number ">27</div></div><div class="day empty-day"><div class="day-number ">28</div></div><div class="day holiday-day"><div class="day-number holiday-number">1</div><div class="holiday-name">삼일절</div><div class="day-content"></div></div><div class="day holiday-day"><div class="day-number holiday-number">2</div><div class="holiday-name">대체공휴일</div><div class="day-content"></div></div><div class="day"><div class="day-number ">3</div><div class="day-content"><div class="activity-block project">실무 프로젝트(2) 552h</div></div></div><div class="day"><div class="day-number ">4</div><div class="day-content"><div class="activity-block project">실무 프로젝트(2) 552h</div></div></div><div class="day"><div class="day-number ">5</div><div class="day-content"><div class="activity-block project">실무 프로젝트(2) 552h</div><div class="activity-block sprint">프로덕트 기획 121h</div></div></div><div class="day"><div class="day-number ">6</div><div class="day-content"><div class="activity-block sprint">프로덕트 기획 121h</div></div></div><div class="day weekend-day"><div class="day-number ">7</div></div><div class="day weekend-day"><div class="day-number ">8</div></div><div class="day"><div class="day-number ">9</div><div class="day-content"><div class="activity-block sprint">프로덕트 기획 121h</div></div></div><div class="day"><div class="day-number ">10</div><div class="day-content"><div class="activity-block sprint">프로덕트 기획 121h</div><div class="activity-block sprint">UX/UI 디자인 141h</div></div></div><div class="day"><div class="day-number ">11</div><div class="day-content"><div class="activity-block sprint">UX/UI 디자인 141h</div></div></div><div class="day"><div class="day-number ">12</div><div class="day-content"><div class="activity-block sprint">UX/UI 디자인 141h</div></div></div><div class="day"><div class="day-number ">13</div><div class="day-content"><div class="activity-block sprint">UX/UI 디자인 141h</div></div></div><div class="day weekend-day"><div class="day-number ">14</div></div><div class="day weekend-day"><div class="day-number ">15</div></div><div class="day"><div class="day-number ">16</div><div class="day-content"><div class="activity-block sprint">UX/UI 디자인 141h</div><div class="activity-block theory">MVP 개발: 프론트엔드 1h</div><div class="activity-block theory">MVP 개발: 프론트엔드 4h</div><div class="activity-block">+1 더보기</div></div></div><div class="day"><div class="day-number ">17</div><div class="day-content"><div class="activity-block theory">MVP 개발: 프론트엔드 72h</div></div></div><div class="day"><div class="day-number ">18</div><div class="day-content"><div class="activity-block theory">MVP 개발: 프론트엔드 72h</div></div></div><div class="day"><div class="day-number ">19</div><div class="day-content"><div class="activity-block theory">MVP 개발: 프론트엔드 72h</div><div class="activity-block theory">MVP 개발: 프론트엔드 120h</div></div></div><div class="day"><div class="day-number ">20</div><div class="day-content"><div class="activity-block theory">MVP 개발: 프론트엔드 120h</div></div></div><div class="day weekend-day"><div class="day-number ">21</div></div><div class="day weekend-day"><div class="day-number ">22</div></div><div class="day"><div class="day-number ">23</div><div class="day-content"><div class="activity-block theory">MVP 개발: 프론트엔드 120h</div></div></div><div class="day"><div class="day-number ">24</div><div class="day-content"><div class="activity-block theory">MVP 개발: 프론트엔드 120h</div><div class="activity-block sprint">MVP 개발: 프론트엔드 42h</div></div></div><div class="day"><div class="day-number ">25</div><div class="day-content"><div class="activity-block sprint">MVP 개발: 프론트엔드 42h</div></div></div><div class="day"><div class="day-number ">26</div><div class="day-content"><div class="activity-block sprint">MVP 개발: 프론트엔드 42h</div><div class="activity-block sprint">MVP 개발: 프론트엔드 30h</div></div></div><div class="day"><div class="day-number ">27</div><div class="day-content"><div class="activity-block sprint">MVP 개발: 프론트엔드 30h</div></div></div><div class="day weekend-day"><div class="day-number ">28</div></div><div class="day weekend-day"><div class="day-number ">29</div></div><div class="day"><div class="day-number ">30</div><div class="day-content"><div class="activity-block theory">MVP 개발: 프론트엔드 291h</div></div></div><div class="day"><div class="day-number ">31</div><div class="day-content"><div class="activity-block theory">MVP 개발: 프론트엔드 291h</div></div></div><div class="day empty-day"><div class="day-number ">1</div></div><div class="day empty-day"><div class="day-number ">2</div></div><div class="day empty-day"><div class="day-number ">3</div></div><div class="day empty-day"><div class="day-number ">4</div></div><div class="day empty-day"><div class="day-number ">5</div></div>
+      </div>
+    </div>
+  
+    <div class="month-container">
+      <div class="month-title">2026년 4월</div>
+      <div class="calendar">
+        <div class="day-header">월</div>
+        <div class="day-header">화</div>
+        <div class="day-header">수</div>
+        <div class="day-header">목</div>
+        <div class="day-header">금</div>
+        <div class="day-header">토</div>
+        <div class="day-header">일</div>
+  <div class="day empty-day"><div class="day-number ">30</div></div><div class="day empty-day"><div class="day-number ">31</div></div><div class="day"><div class="day-number ">1</div><div class="day-content"><div class="activity-block theory">MVP 개발: 프론트엔드 291h</div></div></div><div class="day"><div class="day-number ">2</div><div class="day-content"><div class="activity-block theory">MVP 개발: 프론트엔드 291h</div></div></div><div class="day"><div class="day-number ">3</div><div class="day-content"><div class="activity-block theory">MVP 개발: 프론트엔드 291h</div></div></div><div class="day weekend-day"><div class="day-number ">4</div></div><div class="day weekend-day"><div class="day-number ">5</div></div><div class="day"><div class="day-number ">6</div><div class="day-content"><div class="activity-block theory">MVP 개발: 프론트엔드 291h</div></div></div><div class="day"><div class="day-number ">7</div><div class="day-content"><div class="activity-block theory">MVP 개발: 프론트엔드 291h</div></div></div><div class="day"><div class="day-number ">8</div><div class="day-content"><div class="activity-block theory">MVP 개발: 프론트엔드 291h</div></div></div><div class="day"><div class="day-number ">9</div><div class="day-content"><div class="activity-block theory">MVP 개발: 프론트엔드 291h</div><div class="activity-block sprint">MVP 개발: 프론트엔드 172h</div></div></div><div class="day"><div class="day-number ">10</div><div class="day-content"><div class="activity-block sprint">MVP 개발: 프론트엔드 172h</div></div></div><div class="day weekend-day"><div class="day-number ">11</div></div><div class="day weekend-day"><div class="day-number ">12</div></div><div class="day"><div class="day-number ">13</div><div class="day-content"><div class="activity-block sprint">MVP 개발: 프론트엔드 172h</div></div></div><div class="day"><div class="day-number ">14</div><div class="day-content"><div class="activity-block sprint">MVP 개발: 프론트엔드 172h</div></div></div><div class="day"><div class="day-number ">15</div><div class="day-content"><div class="activity-block sprint">MVP 개발: 프론트엔드 172h</div></div></div><div class="day"><div class="day-number ">16</div><div class="day-content"><div class="activity-block sprint">MVP 개발: 프론트엔드 172h</div><div class="activity-block theory">MVP 개발: 백엔드 186h</div></div></div><div class="day"><div class="day-number ">17</div><div class="day-content"><div class="activity-block theory">MVP 개발: 백엔드 186h</div></div></div><div class="day weekend-day"><div class="day-number ">18</div></div><div class="day weekend-day"><div class="day-number ">19</div></div><div class="day"><div class="day-number ">20</div><div class="day-content"><div class="activity-block theory">MVP 개발: 백엔드 186h</div></div></div><div class="day"><div class="day-number ">21</div><div class="day-content"><div class="activity-block theory">MVP 개발: 백엔드 186h</div></div></div><div class="day"><div class="day-number ">22</div><div class="day-content"><div class="activity-block theory">MVP 개발: 백엔드 186h</div></div></div><div class="day"><div class="day-number ">23</div><div class="day-content"><div class="activity-block theory">MVP 개발: 백엔드 186h</div></div></div><div class="day"><div class="day-number ">24</div><div class="day-content"><div class="activity-block theory">MVP 개발: 백엔드 186h</div><div class="activity-block theory">MVP 개발: 백엔드 3h</div><div class="activity-block theory">MVP 개발: 백엔드 3h</div><div class="activity-block">+1 더보기</div></div></div><div class="day weekend-day"><div class="day-number ">25</div></div><div class="day weekend-day"><div class="day-number ">26</div></div><div class="day"><div class="day-number ">27</div><div class="day-content"><div class="activity-block sprint">MVP 개발: 백엔드 142h</div></div></div><div class="day"><div class="day-number ">28</div><div class="day-content"><div class="activity-block sprint">MVP 개발: 백엔드 142h</div></div></div><div class="day"><div class="day-number ">29</div><div class="day-content"><div class="activity-block sprint">MVP 개발: 백엔드 142h</div></div></div><div class="day"><div class="day-number ">30</div><div class="day-content"><div class="activity-block sprint">MVP 개발: 백엔드 142h</div><div class="activity-block sprint">MVP 개발: 백엔드 2h</div><div class="activity-block theory">MVP 개발: 서비스 고도화 191h</div></div></div><div class="day empty-day"><div class="day-number holiday-number">1</div><div class="holiday-name">근로자의 날</div></div><div class="day empty-day"><div class="day-number ">2</div></div><div class="day empty-day"><div class="day-number ">3</div></div>
+      </div>
+    </div>
+  
+    <div class="month-container">
+      <div class="month-title">2026년 5월</div>
+      <div class="calendar">
+        <div class="day-header">월</div>
+        <div class="day-header">화</div>
+        <div class="day-header">수</div>
+        <div class="day-header">목</div>
+        <div class="day-header">금</div>
+        <div class="day-header">토</div>
+        <div class="day-header">일</div>
+  <div class="day empty-day"><div class="day-number ">27</div></div><div class="day empty-day"><div class="day-number ">28</div></div><div class="day empty-day"><div class="day-number ">29</div></div><div class="day empty-day"><div class="day-number ">30</div></div><div class="day holiday-day"><div class="day-number holiday-number">1</div><div class="holiday-name">근로자의 날</div><div class="day-content"></div></div><div class="day weekend-day"><div class="day-number ">2</div></div><div class="day weekend-day"><div class="day-number ">3</div></div><div class="day"><div class="day-number ">4</div><div class="day-content"><div class="activity-block theory">MVP 개발: 서비스 고도화 191h</div></div></div><div class="day holiday-day"><div class="day-number holiday-number">5</div><div class="holiday-name">어린이날</div><div class="day-content"></div></div><div class="day"><div class="day-number ">6</div><div class="day-content"><div class="activity-block theory">MVP 개발: 서비스 고도화 191h</div></div></div><div class="day"><div class="day-number ">7</div><div class="day-content"><div class="activity-block theory">MVP 개발: 서비스 고도화 191h</div></div></div><div class="day"><div class="day-number ">8</div><div class="day-content"><div class="activity-block theory">MVP 개발: 서비스 고도화 191h</div><div class="activity-block theory">MVP 개발: 서비스 고도화 74h</div></div></div><div class="day weekend-day"><div class="day-number ">9</div></div><div class="day weekend-day"><div class="day-number ">10</div></div><div class="day"><div class="day-number ">11</div><div class="day-content"><div class="activity-block theory">MVP 개발: 서비스 고도화 74h</div><div class="activity-block theory">MVP 개발: 서비스 고도화 42h</div></div></div><div class="day"><div class="day-number ">12</div><div class="day-content"><div class="activity-block theory">MVP 개발: 서비스 고도화 42h</div></div></div><div class="day"><div class="day-number ">13</div><div class="day-content"><div class="activity-block theory">MVP 개발: 서비스 고도화 42h</div><div class="activity-block sprint">MVP 개발: 서비스 고도화 117h</div></div></div><div class="day"><div class="day-number ">14</div><div class="day-content"><div class="activity-block sprint">MVP 개발: 서비스 고도화 117h</div></div></div><div class="day"><div class="day-number ">15</div><div class="day-content"><div class="activity-block sprint">MVP 개발: 서비스 고도화 117h</div></div></div><div class="day weekend-day"><div class="day-number ">16</div></div><div class="day weekend-day"><div class="day-number ">17</div></div><div class="day"><div class="day-number ">18</div><div class="day-content"><div class="activity-block sprint">MVP 개발: 서비스 고도화 117h</div><div class="activity-block sprint">MVP 개발: 서비스 고도화 24h</div></div></div><div class="day"><div class="day-number ">19</div><div class="day-content"><div class="activity-block sprint">MVP 개발: 서비스 고도화 24h</div><div class="activity-block sprint">MVP 개발: 서비스 고도화 29h</div></div></div><div class="day"><div class="day-number ">20</div><div class="day-content"><div class="activity-block sprint">MVP 개발: 서비스 고도화 29h</div><div class="activity-block theory">프로덕트 데이터 분석 25h</div></div></div><div class="day"><div class="day-number ">21</div><div class="day-content"><div class="activity-block theory">프로덕트 데이터 분석 25h</div><div class="activity-block theory">프로덕트 데이터 분석 26h</div></div></div><div class="day"><div class="day-number ">22</div><div class="day-content"><div class="activity-block theory">프로덕트 데이터 분석 26h</div><div class="activity-block sprint">프로덕트 데이터 분석 119h</div></div></div><div class="day weekend-day"><div class="day-number ">23</div></div><div class="day holiday-day"><div class="day-number holiday-number">24</div><div class="holiday-name">부처님 오신 날</div><div class="day-content"></div></div><div class="day holiday-day"><div class="day-number holiday-number">25</div><div class="holiday-name">대체공휴일</div><div class="day-content"></div></div><div class="day"><div class="day-number ">26</div><div class="day-content"><div class="activity-block sprint">프로덕트 데이터 분석 119h</div></div></div><div class="day"><div class="day-number ">27</div><div class="day-content"><div class="activity-block sprint">프로덕트 데이터 분석 119h</div><div class="activity-block sprint">프로덕트 데이터 분석 22h</div></div></div><div class="day"><div class="day-number ">28</div><div class="day-content"><div class="activity-block sprint">프로덕트 데이터 분석 22h</div><div class="activity-block project">실무 프로젝트(3-1) 792h</div></div></div><div class="day"><div class="day-number ">29</div><div class="day-content"><div class="activity-block project">실무 프로젝트(3-1) 792h</div></div></div><div class="day weekend-day"><div class="day-number ">30</div></div><div class="day weekend-day"><div class="day-number ">31</div></div>
+      </div>
+    </div>
+  
+    <div class="month-container">
+      <div class="month-title">2026년 6월</div>
+      <div class="calendar">
+        <div class="day-header">월</div>
+        <div class="day-header">화</div>
+        <div class="day-header">수</div>
+        <div class="day-header">목</div>
+        <div class="day-header">금</div>
+        <div class="day-header">토</div>
+        <div class="day-header">일</div>
+  <div class="day"><div class="day-number ">1</div><div class="day-content"><div class="activity-block project">실무 프로젝트(3-1) 792h</div></div></div><div class="day"><div class="day-number ">2</div><div class="day-content"><div class="activity-block project">실무 프로젝트(3-1) 792h</div></div></div><div class="day holiday-day"><div class="day-number holiday-number">3</div><div class="holiday-name">지방선거</div><div class="day-content"></div></div><div class="day"><div class="day-number ">4</div><div class="day-content"><div class="activity-block project">실무 프로젝트(3-1) 792h</div></div></div><div class="day"><div class="day-number ">5</div><div class="day-content"><div class="activity-block project">실무 프로젝트(3-1) 792h</div></div></div><div class="day holiday-day"><div class="day-number holiday-number">6</div><div class="holiday-name">현충일</div><div class="day-content"></div></div><div class="day weekend-day"><div class="day-number ">7</div></div><div class="day"><div class="day-number ">8</div><div class="day-content"><div class="activity-block project">실무 프로젝트(3-1) 792h</div></div></div><div class="day"><div class="day-number ">9</div><div class="day-content"><div class="activity-block project">실무 프로젝트(3-1) 792h</div></div></div><div class="day"><div class="day-number ">10</div><div class="day-content"><div class="activity-block project">실무 프로젝트(3-1) 792h</div></div></div><div class="day"><div class="day-number ">11</div><div class="day-content"><div class="activity-block project">실무 프로젝트(3-1) 792h</div></div></div><div class="day"><div class="day-number ">12</div><div class="day-content"><div class="activity-block project">실무 프로젝트(3-1) 792h</div></div></div><div class="day weekend-day"><div class="day-number ">13</div></div><div class="day weekend-day"><div class="day-number ">14</div></div><div class="day"><div class="day-number ">15</div><div class="day-content"><div class="activity-block project">실무 프로젝트(3-1) 792h</div></div></div><div class="day"><div class="day-number ">16</div><div class="day-content"><div class="activity-block project">실무 프로젝트(3-1) 792h</div></div></div><div class="day"><div class="day-number ">17</div><div class="day-content"><div class="activity-block project">실무 프로젝트(3-1) 792h</div></div></div><div class="day"><div class="day-number ">18</div><div class="day-content"><div class="activity-block project">실무 프로젝트(3-1) 792h</div></div></div><div class="day"><div class="day-number ">19</div><div class="day-content"><div class="activity-block project">실무 프로젝트(3-1) 792h</div></div></div><div class="day weekend-day"><div class="day-number ">20</div></div><div class="day weekend-day"><div class="day-number ">21</div></div><div class="day"><div class="day-number ">22</div><div class="day-content"><div class="activity-block project">실무 프로젝트(3-1) 792h</div></div></div><div class="day"><div class="day-number ">23</div><div class="day-content"><div class="activity-block project">실무 프로젝트(3-1) 792h</div></div></div><div class="day"><div class="day-number ">24</div><div class="day-content"><div class="activity-block project">실무 프로젝트(3-1) 792h</div></div></div><div class="day"><div class="day-number ">25</div><div class="day-content"><div class="activity-block project">실무 프로젝트(3-1) 792h</div></div></div><div class="day"><div class="day-number ">26</div><div class="day-content"><div class="activity-block project">실무 프로젝트(3-1) 792h</div></div></div><div class="day weekend-day"><div class="day-number ">27</div></div><div class="day weekend-day"><div class="day-number ">28</div></div><div class="day"><div class="day-number ">29</div><div class="day-content"><div class="activity-block project">실무 프로젝트(3-1) 792h</div></div></div><div class="day"><div class="day-number ">30</div><div class="day-content"><div class="activity-block project">실무 프로젝트(3-1) 792h</div><div class="activity-block theory">비즈니스 확장 52h</div></div></div><div class="day empty-day"><div class="day-number ">1</div></div><div class="day empty-day"><div class="day-number ">2</div></div><div class="day empty-day"><div class="day-number ">3</div></div><div class="day empty-day"><div class="day-number ">4</div></div><div class="day empty-day"><div class="day-number ">5</div></div>
+      </div>
+    </div>
+  
+    <div class="month-container">
+      <div class="month-title">2026년 7월</div>
+      <div class="calendar">
+        <div class="day-header">월</div>
+        <div class="day-header">화</div>
+        <div class="day-header">수</div>
+        <div class="day-header">목</div>
+        <div class="day-header">금</div>
+        <div class="day-header">토</div>
+        <div class="day-header">일</div>
+  <div class="day empty-day"><div class="day-number ">29</div></div><div class="day empty-day"><div class="day-number ">30</div></div><div class="day"><div class="day-number ">1</div><div class="day-content"><div class="activity-block theory">비즈니스 확장 52h</div></div></div><div class="day"><div class="day-number ">2</div><div class="day-content"><div class="activity-block theory">비즈니스 확장 52h</div></div></div><div class="day"><div class="day-number ">3</div><div class="day-content"><div class="activity-block theory">비즈니스 커뮤니케이션 6h</div><div class="activity-block project">실무 프로젝트(3-2) 144h</div></div></div><div class="day weekend-day"><div class="day-number ">4</div></div><div class="day weekend-day"><div class="day-number ">5</div></div><div class="day"><div class="day-number ">6</div><div class="day-content"><div class="activity-block project">실무 프로젝트(3-2) 144h</div></div></div><div class="day"><div class="day-number ">7</div><div class="day-content"><div class="activity-block project">실무 프로젝트(3-2) 144h</div></div></div><div class="day"><div class="day-number ">8</div><div class="day-content"><div class="activity-block project">실무 프로젝트(3-2) 144h</div></div></div><div class="day"><div class="day-number ">9</div><div class="day-content"><div class="activity-block project">실무 프로젝트(3-2) 144h</div><div class="activity-block sprint">비즈니스 확장 27h</div></div></div><div class="day"><div class="day-number ">10</div><div class="day-content"><div class="activity-block sprint">비즈니스 확장 27h</div><div class="activity-block sprint">비즈니스 커뮤니케이션 93h</div></div></div><div class="day weekend-day"><div class="day-number ">11</div></div><div class="day weekend-day"><div class="day-number ">12</div></div><div class="day"><div class="day-number ">13</div><div class="day-content"><div class="activity-block sprint">비즈니스 커뮤니케이션 93h</div></div></div><div class="day"><div class="day-number ">14</div><div class="day-content"><div class="activity-block sprint">비즈니스 커뮤니케이션 93h</div><div class="activity-block holiday">수료식 2h</div></div></div><div class="day"><div class="day-number ">15</div></div><div class="day"><div class="day-number ">16</div></div><div class="day"><div class="day-number ">17</div></div><div class="day weekend-day"><div class="day-number ">18</div></div><div class="day weekend-day"><div class="day-number ">19</div></div><div class="day"><div class="day-number ">20</div></div><div class="day"><div class="day-number ">21</div></div><div class="day"><div class="day-number ">22</div></div><div class="day"><div class="day-number ">23</div></div><div class="day"><div class="day-number ">24</div></div><div class="day weekend-day"><div class="day-number ">25</div></div><div class="day weekend-day"><div class="day-number ">26</div></div><div class="day"><div class="day-number ">27</div></div><div class="day"><div class="day-number ">28</div></div><div class="day"><div class="day-number ">29</div></div><div class="day"><div class="day-number ">30</div></div><div class="day"><div class="day-number ">31</div></div><div class="day empty-day"><div class="day-number ">1</div></div><div class="day empty-day"><div class="day-number ">2</div></div>
+      </div>
+    </div>
+  
+        
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color theory" style="background: #e8e5ff; border-color: #9c27b0;"></div>
+                <span>교과목 이론</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color sprint" style="background: #e8f5e8; border-color: #4caf50;"></div>
+                <span>스프린트 미션</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color project" style="background: #e3f2fd; border-color: #2196f3;"></div>
+                <span>프로젝트</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color holiday" style="background: #ffebee; border-color: #f44336;"></div>
+                <span>휴강</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #ffebee; border: 2px solid #f44336;"></div>
+                <span>공휴일</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
